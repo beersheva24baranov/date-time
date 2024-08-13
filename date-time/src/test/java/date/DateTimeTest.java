@@ -45,24 +45,24 @@ public class DateTimeTest {
 
       @Test
     void pastTemporalDateProximityTest() {
-        LocalDate date10Feb = LocalDate.of(2024, 2, 10);
+        LocalDate date10Jan = LocalDate.of(2024, 1, 10);
         LocalDate date15Mar = LocalDate.of(2024, 3, 15);
         LocalDate date20Apr = LocalDate.of(2024, 4, 20);
         LocalDate date25May = LocalDate.of(2024, 5, 25);
         LocalDate date30Jun = LocalDate.of(2024, 6, 30);
 
         PastTemporalDateProximity adjuster = new PastTemporalDateProximity(new Temporal[]{
-            date20Apr, date25May, date10Feb
+            date20Apr, date25May, date10Jan
         });
 
-        assertNull(date10Feb.with(adjuster));
-        assertEquals(date10Feb, date15Mar.with(adjuster));
-        assertEquals(date10Feb, date20Apr.with(adjuster));
+        assertNull(date10Jan.with(adjuster));
+        assertEquals(date10Jan, date15Mar.with(adjuster));
+        assertEquals(date10Jan, date20Apr.with(adjuster));
         assertEquals(date20Apr, date25May.with(adjuster));
         assertEquals(date25May, date30Jun.with(adjuster));
 
-        assertEquals(MinguoDate.from(date10Feb), MinguoDate.from(date20Apr).with(adjuster));
-        assertEquals(JapaneseDate.from(date10Feb), JapaneseDate.from(date20Apr).with(adjuster));
+        assertEquals(MinguoDate.from(date10Jan), MinguoDate.from(date20Apr).with(adjuster));
+        assertEquals(JapaneseDate.from(date10Jan), JapaneseDate.from(date20Apr).with(adjuster));
 
         assertThrows(RuntimeException.class, () -> LocalTime.now().with(adjuster));
     }
